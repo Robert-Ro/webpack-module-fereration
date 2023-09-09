@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { Component1 } from './components'
 
 const App = () => {
   return (
@@ -11,9 +12,9 @@ const App = () => {
       }}
     >
       <h1>App 2</h1>
-      <span>11</span>
+      <Component1 />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

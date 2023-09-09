@@ -1,17 +1,21 @@
 {
   "name": "module-federation",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "app1",
-      "app2"
-    ]
-  },
   "scripts": {
-    "start": "lerna run --parallel start",
-    "build": "lerna run build"
+    "start:app1": "cd packages/app1 && pnpm run start",
+    "start:app2": "cd packages/app2 && pnpm run start",
+    "build:app1": "cd packages/app1 && pnpm run build",
+    "build:app2": "cd packages/app2 && pnpm run build",
+    "deploy:app1": "cd packages/app1 && pnpm run deploy",
+    "deploy:app2": "cd packages/app2 && pnpm run deploy",
+    "start": "cross-env NODE_ENV=development concurrently 'pnpm:start:app1' 'pnpm:start:app2'",
+    "build": "cross-env NODE_ENV=production concurrently 'pnpm:build:app1' 'pnpm:build:app2'",
+    "deploy": "cross-env NODE_ENV=production concurrently 'pnpm:deploy:app1' 'pnpm:deploy:app2'"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "concurrently": "8.0.1",
+    "cross-env": "^7.0.3",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7"
   }
 }
