@@ -33,7 +33,11 @@ module.exports = {
         // './App': './src/App',
         './Component1': './src/components/component1',
       },
-      // shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      shared: {
+        react: { singleton: true },
+        'react-dom': { singleton: true },
+        '@tanstack/react-query': { singleton: true },
+      },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

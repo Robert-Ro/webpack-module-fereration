@@ -31,7 +31,11 @@ module.exports = {
       remotes: {
         app2: 'app2@[app2Url]/module-federation.js',
       },
-      // shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      shared: {
+        react: { singleton: true },
+        'react-dom': { singleton: true },
+        '@tanstack/react-query': { singleton: true },
+      },
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({

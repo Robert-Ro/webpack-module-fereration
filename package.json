@@ -13,9 +13,12 @@
     "deploy": "cross-env NODE_ENV=production concurrently 'pnpm:deploy:app1' 'pnpm:deploy:app2'"
   },
   "devDependencies": {
-    "concurrently": "8.0.1",
-    "cross-env": "^7.0.3",
     "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7"
+    "@types/react-dom": "^18.2.7",
+    "concurrently": "8.0.1",
+    "cross-env": "^7.0.3"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.35.0"
   }
 }
