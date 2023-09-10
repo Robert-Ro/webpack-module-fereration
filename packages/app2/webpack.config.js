@@ -5,9 +5,14 @@ const path = require('path')
 module.exports = {
   entry: './src/index',
   mode: process.env.NODE_ENV,
+  target: 'web',
   devServer: {
+    headers: { 'Access-Control-Allow-Origin': '*' },
     static: path.join(__dirname, 'dist'),
     port: process.env.NODE_ENV === 'development' ? 3002 : 4002,
+    host: 'app2.mapleimage.com',
+    allowedHosts: ['app2.mapleimage.com', 'app1.mapleimage.com'],
+    // hot: true,
   },
   output: {
     publicPath: 'auto',
@@ -31,13 +36,13 @@ module.exports = {
       filename: 'module-federation.js',
       exposes: {
         // './App': './src/App',
-        './Component1': './src/components/component1',
+        './Component1': './src/components/component1/index.js',
       },
-      shared: {
-        react: { singleton: true },
-        'react-dom': { singleton: true },
-        '@tanstack/react-query': { singleton: true },
-      },
+      // shared: {
+      //   react: { singleton: true },
+      //   'react-dom': { singleton: true },
+      //   '@tanstack/react-query': { singleton: true },
+      // },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

@@ -6,9 +6,13 @@ const path = require('path')
 module.exports = {
   entry: './src/index',
   mode: process.env.NODE_ENV,
+  target: 'web',
   devServer: {
+    headers: { 'Access-Control-Allow-Origin': '*' },
     static: path.join(__dirname, 'dist'),
     port: process.env.NODE_ENV === 'development' ? 3001 : 4001,
+    host: 'app1.mapleimage.com',
+    allowedHosts: ['app2.mapleimage.com', 'app1.mapleimage.com'],
   },
   output: {
     publicPath: 'auto',
@@ -31,11 +35,11 @@ module.exports = {
       remotes: {
         app2: 'app2@[app2Url]/module-federation.js',
       },
-      shared: {
-        react: { singleton: true },
-        'react-dom': { singleton: true },
-        '@tanstack/react-query': { singleton: true },
-      },
+      // shared: {
+      //   react: { singleton: true },
+      //   'react-dom': { singleton: true },
+      //   '@tanstack/react-query': { singleton: true },
+      // },
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({
