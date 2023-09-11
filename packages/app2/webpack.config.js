@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { ModuleFederationPlugin } = require('webpack').container
 const path = require('path')
+const deps = require('./package.json').dependencies
 
 module.exports = {
   entry: './src/index',
@@ -38,11 +39,11 @@ module.exports = {
         // './App': './src/App',
         './Component1': './src/components/component1/index.js',
       },
-      // shared: {
-      //   react: { singleton: true },
-      //   'react-dom': { singleton: true },
-      //   '@tanstack/react-query': { singleton: true },
-      // },
+      shared: {
+        react: { singleton: true, requiredVersion: deps.react },
+        'react-dom': { singleton: true, requiredVersion: deps['react-dom'] },
+        '@tanstack/react-query': { requiredVersion: '>=4.35.0' },
+      },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

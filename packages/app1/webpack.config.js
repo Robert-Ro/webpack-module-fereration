@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { ModuleFederationPlugin } = require('webpack').container
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin')
 const path = require('path')
+const deps = require('./package.json').dependencies
 
 module.exports = {
   entry: './src/index',
@@ -35,11 +36,11 @@ module.exports = {
       remotes: {
         app2: 'app2@[app2Url]/module-federation.js',
       },
-      // shared: {
-      //   react: { singleton: true },
-      //   'react-dom': { singleton: true },
-      //   '@tanstack/react-query': { singleton: true },
-      // },
+      shared: {
+        react: { singleton: true, requiredVersion: deps.react },
+        'react-dom': { singleton: true, requiredVersion: deps['react-dom'] },
+        '@tanstack/react-query': { requiredVersion: '>=4.35.0' },
+      },
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({
